@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>∞ MathVerse — Interactive Mathematics Laboratory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<!-- ══ BACKGROUND SHADER CANVAS ══════════════════════════ -->
+<canvas id="bgShader"></canvas>
+
+<!-- ══ UNIVERSE MODAL ════════════════════════════════════ -->
+<div id="universeModal" class="modal">
+  <div class="modal-header">
+    <span>🪐 Mathematical Universe — WASD to fly, mouse to look, ESC to exit</span>
+    <button id="universeClose">✕</button>
+  </div>
+  <div id="universeContainer"></div>
+</div>
+
+<!-- ══ NAV ═══════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-logo">∞ MathVerse</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#fractals">Fractals</a></li>
+    <li><a href="#graph-explorer">Explore</a></li>
+    <li><a href="#riemann">Riemann ζ</a></li>
+    <li><a href="#complex">Complex ℂ</a></li>
+    <li><a href="#animations">Systems</a></li>
+    <li><a href="#reaction">Reaction</a></li>
+    <li><a href="#fluid">Fluid</a></li>
+    <li><a href="#hyperbolic">Hyperbolic</a></li>
+    <li><a href="#fourd">4D</a></li>
+    <li><a href="#numtheory">Numbers</a></li>
+    <li><a href="#sound">Sound</a></li>
+    <li><a href="#surfaces">3D</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button id="wonderBtn" title="Random Mathematical Wonder">✨</button>
+    <button id="universeBtn" title="Mathematical Universe [U]">🪐</button>
+    <button id="fullscreenBtn" title="Fullscreen [F11]">⛶</button>
+    <div class="nav-toggle" id="navToggle">☰</div>
+  </div>
+</nav>
+
+<!-- ══ KEYBOARD SHORTCUT HUD ══════════════════════════════ -->
+<div id="shortcutHud" class="shortcut-hud">
+  <span>Press <kbd>?</kbd> for shortcuts</span>
+</div>
+<div id="shortcutOverlay" class="shortcut-overlay hidden">
+  <div class="shortcut-panel">
+    <h3>⌨ Keyboard Shortcuts</h3>
+    <div class="shortcut-grid">
+      <kbd>F</kbd><span>Fractals</span>
+      <kbd>R</kbd><span>Riemann ζ</span>
+      <kbd>C</kbd><span>Complex ℂ</span>
+      <kbd>D</kbd><span>Reaction-Diffusion</span>
+      <kbd>L</kbd><span>Fluid Sim</span>
+      <kbd>H</kbd><span>Hyperbolic</span>
+      <kbd>4</kbd><span>4D Geometry</span>
+      <kbd>N</kbd><span>Number Theory</span>
+      <kbd>S</kbd><span>Sound Synthesis</kbd></span>
+      <kbd>U</kbd><span>Universe Mode</span>
+      <kbd>✨</kbd><span>Random Wonder</span>
+      <kbd>ESC</kbd><span>Close/Exit</span>
+    </div>
+    <button id="closeShortcuts" class="ctrl-btn">Close</button>
+  </div>
+</div>
+
+<!-- ══ HERO ═══════════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">∀ x ∈ ℂ — An Interactive Mathematics Laboratory</div>
+    <h1 class="hero-title">
+      <span class="line1">The Beauty</span>
+      <span class="line2">of Mathematics</span>
+    </h1>
+    <p class="hero-subtitle">Where equations breathe, patterns emerge, and infinity unfolds before your eyes.</p>
+    <div class="hero-formula" id="heroFormula">$$e^{i\pi} + 1 = 0 \qquad \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}$$</div>
+    <div class="hero-cta-row">
+      <a href="#fractals" class="hero-cta">Begin Exploration ↓</a>
+      <button class="hero-cta hero-cta-alt" id="heroUniverse">Enter Universe 🪐</button>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">scroll to explore</div>
+</section>
+
+<!-- ══ SECTION 1: FRACTALS ════════════════════════════════ -->
+<section id="fractals" class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Interactive Fractals</h2>
+    <p>Infinite complexity from simple rules. WebGL-powered. Zoom into infinity.</p>
+  </div>
+  <div class="fractal-tabs">
+    <button class="ftab active" data-fractal="mandelbrot">Mandelbrot Set</button>
+    <button class="ftab" data-fractal="julia">Julia Set</button>
+    <button class="ftab" data-fractal="burning">Burning Ship</button>
+    <button class="ftab" data-fractal="mandelbulb">Mandelbulb 3D</button>
+  </div>
+  <div class="fractal-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="fractalCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="fractalCanvas">⛶</button>
+    </div>
+    <div class="fractal-controls panel">
+      <div class="ctrl-group">
+        <label>Iterations <span id="iterVal">256</span></label>
+        <input type="range" id="iterSlider" min="32" max="1024" value="256" />
+      </div>
+      <div class="ctrl-group">
+        <label>Color Palette</label>
+        <select id="paletteSelect">
+          <option value="nebula">Nebula</option>
+          <option value="fire">Inferno</option>
+          <option value="ocean">Deep Ocean</option>
+          <option value="gold">Gold Dust</option>
+          <option value="neon">Neon Dreams</option>
+          <option value="hsl">HSL Smooth</option>
+        </select>
+      </div>
+      <div class="ctrl-group" id="juliaControls">
+        <label>Julia C-Real <span id="juliaRealVal">-0.70</span></label>
+        <input type="range" id="juliaReal" min="-2" max="2" step="0.01" value="-0.7" />
+        <label>Julia C-Imag <span id="juliaImagVal">0.27</span></label>
+        <input type="range" id="juliaImag" min="-2" max="2" step="0.01" value="0.27" />
+      </div>
+      <button id="resetFractal" class="ctrl-btn">⟳ Reset View</button>
+      <button id="saveFractal" class="ctrl-btn">↓ Save Image</button>
+      <p class="hint-text">🖱 Drag to pan · Scroll to zoom · Double-click to zoom in</p>
+      <p id="fractalCoords" class="hint-text">Center: (0, 0) | Zoom: 1×</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 2: GRAPH EXPLORER ══════════════════════════ -->
+<section id="graph-explorer" class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Equation Explorer</h2>
+    <p>Type any equation. Watch mathematics come alive in real time.</p>
+  </div>
+  <div class="graph-layout">
+    <div class="graph-sidebar panel">
+      <div class="equation-inputs" id="equationInputs">
+        <div class="eq-row" data-idx="0">
+          <span class="eq-color" style="background:#00c8ff"></span>
+          <input type="text" class="eq-input" value="Math.sin(x)" />
+          <button class="eq-remove">×</button>
+        </div>
+        <div class="eq-row" data-idx="1">
+          <span class="eq-color" style="background:#bf5af2"></span>
+          <input type="text" class="eq-input" value="Math.cos(x)*Math.exp(-x/10)" />
+          <button class="eq-remove">×</button>
+        </div>
+      </div>
+      <button id="addEquation" class="ctrl-btn">+ Add Equation</button>
+      <div class="preset-eqs">
+        <p class="preset-label">Quick Presets:</p>
+        <button class="preset" data-eq="Math.sin(x)/x">sinc(x)</button>
+        <button class="preset" data-eq="x*Math.sin(1/x)">x·sin(1/x)</button>
+        <button class="preset" data-eq="Math.sin(a*x+b)">sin(ax+b)</button>
+        <button class="preset" data-eq="Math.sin(x)+Math.sin(2*x)/2+Math.sin(3*x)/3">Fourier</button>
+        <button class="preset" data-eq="Math.exp(-x*x/2)/Math.sqrt(2*Math.PI)">Gaussian</button>
+        <button class="preset" data-eq="Math.floor(Math.sin(x)*4)/4">Quantize</button>
+        <button class="preset" data-eq="Math.sin(x*x)">Fresnel</button>
+        <button class="preset" data-eq="Math.tanh(a*x)">tanh</button>
+      </div>
+      <div class="ctrl-group">
+        <label>a = <span id="paramAVal">1.0</span></label>
+        <input type="range" id="paramA" min="-5" max="5" step="0.1" value="1" />
+      </div>
+      <div class="ctrl-group">
+        <label>b = <span id="paramBVal">0.0</span></label>
+        <input type="range" id="paramB" min="-5" max="5" step="0.1" value="0" />
+      </div>
+    </div>
+    <div id="graphPlot" class="graph-canvas"></div>
+  </div>
+</section>
+
+<!-- ══ SECTION 3: FAMOUS ══════════════════════════════════ -->
+<section id="famous" class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Mathematical Icons</h2>
+    <p>The most beautiful results in history, brought to life.</p>
+  </div>
+  <div class="famous-grid">
+    <div class="famous-card">
+      <div class="card-title">Euler's Identity</div>
+      <div class="card-formula">$$e^{i\pi} + 1 = 0$$</div>
+      <canvas id="eulerCanvas" width="360" height="260"></canvas>
+      <p class="card-desc">Five fundamental constants united in one sublime equation.</p>
+    </div>
+    <div class="famous-card">
+      <div class="card-title">Fibonacci Spiral</div>
+      <div class="card-formula">$$\varphi = \frac{1+\sqrt{5}}{2} \approx 1.618$$</div>
+      <canvas id="fibCanvas" width="360" height="260"></canvas>
+      <p class="card-desc">Nature's blueprint — the golden ratio hidden in every spiral.</p>
+    </div>
+    <div class="famous-card">
+      <div class="card-title">Ulam Spiral</div>
+      <div class="card-formula">$$\pi(x) \sim \frac{x}{\ln x}$$</div>
+      <canvas id="ulamCanvas" width="360" height="260"></canvas>
+      <p class="card-desc">Primes arranged in a spiral reveal mysterious diagonal patterns.</p>
+    </div>
+    <div class="famous-card">
+      <div class="card-title">Fourier Series</div>
+      <div class="card-formula">$$f(x) = \sum_{n=1}^{\infty} \frac{\sin(nx)}{n}$$</div>
+      <canvas id="fourierCanvas" width="360" height="260"></canvas>
+      <p class="card-desc">Any periodic signal decomposed into pure harmonics.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 4: RIEMANN ZETA ════════════════════════════ -->
+<section id="riemann" class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Riemann Zeta Function</h2>
+    <p>The deepest unsolved mystery in mathematics — visualized.</p>
+    <div class="section-formula">$$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p\text{ prime}} \frac{1}{1-p^{-s}}$$</div>
+  </div>
+  <div class="riemann-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="riemannCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="riemannCanvas">⛶</button>
+    </div>
+    <div class="panel">
+      <div class="ctrl-group">
+        <label>View Mode</label>
+        <select id="riemannMode">
+          <option value="domain">Domain Coloring |ζ(s)|</option>
+          <option value="zeros">Non-trivial Zeros</option>
+          <option value="critical">Critical Line Re(s)=½</option>
+          <option value="primes">Prime Connection</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>T range (imaginary) <span id="riemannTVal">50</span></label>
+        <input type="range" id="riemannT" min="10" max="200" value="50" />
+      </div>
+      <div class="ctrl-group">
+        <label>Precision <span id="riemannPrecVal">50</span></label>
+        <input type="range" id="riemannPrec" min="10" max="100" value="50" />
+      </div>
+      <button id="riemannAnimate" class="ctrl-btn active-btn">▶ Animate Zeros</button>
+      <div class="info-box">
+        <p>The <strong>Riemann Hypothesis</strong>: all non-trivial zeros lie on the critical line Re(s) = ½.</p>
+        <p>First few zeros: 14.135, 21.022, 25.011...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 5: COMPLEX FUNCTIONS ═══════════════════════ -->
+<section id="complex" class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Complex Function Explorer</h2>
+    <p>Domain coloring makes the invisible visible. Every color tells a story.</p>
+    <div class="section-formula">$$f: \mathbb{C} \to \mathbb{C}, \quad \arg(f(z)) \mapsto \text{hue}, \; |f(z)| \mapsto \text{brightness}$$</div>
+  </div>
+  <div class="complex-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="complexCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="complexCanvas">⛶</button>
+    </div>
+    <div class="panel">
+      <div class="ctrl-group">
+        <label>f(z) =</label>
+        <input type="text" id="complexInput" value="z*z" class="eq-input" style="width:100%;margin-top:0.5rem" />
+      </div>
+      <div class="preset-eqs">
+        <p class="preset-label">Presets:</p>
+        <button class="cpreset" data-fn="z*z">z²</button>
+        <button class="cpreset" data-fn="z*z*z">z³</button>
+        <button class="cpreset" data-fn="cexp(z)">eᶻ</button>
+        <button class="cpreset" data-fn="csin(z)">sin(z)</button>
+        <button class="cpreset" data-fn="ccos(z)">cos(z)</button>
+        <button class="cpreset" data-fn="cdiv({r:1,i:0},z)">1/z</button>
+        <button class="cpreset" data-fn="cmul(z,cconj(z))">z·z̄</button>
+        <button class="cpreset" data-fn="csub(cmul(z,z),{r:1,i:0})">z²-1</button>
+        <button class="cpreset" data-fn="clog(z)">log(z)</button>
+        <button class="cpreset" data-fn="ctanh(z)">tanh(z)</button>
+      </div>
+      <div class="ctrl-group">
+        <label>Show Grid Transform
+          <label class="toggle-switch">
+            <input type="checkbox" id="complexGrid" checked />
+            <span class="toggle-track"></span>
+          </label>
+        </label>
+      </div>
+      <div class="ctrl-group">
+        <label>Zoom <span id="complexZoomVal">2.0</span></label>
+        <input type="range" id="complexZoom" min="0.5" max="10" step="0.1" value="2" />
+      </div>
+      <button id="complexRender" class="ctrl-btn active-btn">⟳ Render</button>
+      <p class="hint-text">Hue = argument · Brightness = magnitude</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 6: DYNAMICAL SYSTEMS ═══════════════════════ -->
+<section id="animations" class="section">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Dynamical Systems</h2>
+    <p>Chaos, order, and everything in between.</p>
+  </div>
+  <div class="anim-tabs">
+    <button class="atab active" data-anim="lorenz">Lorenz</button>
+    <button class="atab" data-anim="lissajous">Lissajous</button>
+    <button class="atab" data-anim="wave">Wave</button>
+    <button class="atab" data-anim="harmonograph">Harmonograph</button>
+    <button class="atab" data-anim="pendulum">Pendulum</button>
+    <button class="atab" data-anim="rossler">Rössler</button>
+    <button class="atab" data-anim="henon">Hénon Map</button>
+    <button class="atab" data-anim="ikeda">Ikeda</button>
+  </div>
+  <div class="anim-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="animCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="animCanvas">⛶</button>
+    </div>
+    <div class="anim-controls panel" id="animControls"></div>
+  </div>
+</section>
+
+<!-- ══ SECTION 7: REACTION-DIFFUSION ══════════════════════ -->
+<section id="reaction" class="section">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>Reaction-Diffusion Patterns</h2>
+    <p>Turing's morphogenesis — how nature generates patterns from chemistry.</p>
+    <div class="section-formula">$$\frac{\partial A}{\partial t} = D_A \nabla^2 A - AB^2 + f(1-A) \qquad \frac{\partial B}{\partial t} = D_B \nabla^2 B + AB^2 - (k+f)B$$</div>
+  </div>
+  <div class="reaction-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="reactionCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="reactionCanvas">⛶</button>
+    </div>
+    <div class="panel">
+      <div class="ctrl-group">
+        <label>Preset Pattern</label>
+        <select id="reactionPreset">
+          <option value="coral">Coral / Maze</option>
+          <option value="spots">Leopard Spots</option>
+          <option value="stripes">Zebra Stripes</option>
+          <option value="mitosis">Cell Division</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>Feed Rate f = <span id="feedVal">0.055</span></label>
+        <input type="range" id="feedRate" min="0.01" max="0.1" step="0.001" value="0.055" />
+      </div>
+      <div class="ctrl-group">
+        <label>Kill Rate k = <span id="killVal">0.062</span></label>
+        <input type="range" id="killRate" min="0.04" max="0.08" step="0.001" value="0.062" />
+      </div>
+      <div class="ctrl-group">
+        <label>Diffusion A = <span id="diffAVal">1.0</span></label>
+        <input type="range" id="diffA" min="0.1" max="2" step="0.05" value="1.0" />
+      </div>
+      <div class="ctrl-group">
+        <label>Diffusion B = <span id="diffBVal">0.5</span></label>
+        <input type="range" id="diffB" min="0.1" max="1" step="0.025" value="0.5" />
+      </div>
+      <button id="reactionReset" class="ctrl-btn">⟳ Reset</button>
+      <button id="reactionSeed" class="ctrl-btn">🎲 Reseed</button>
+      <p class="hint-text">🖱 Click/drag to add chemical B</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 8: FLUID SIMULATION ════════════════════════ -->
+<section id="fluid" class="section">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2>Fluid Dynamics</h2>
+    <p>Navier-Stokes equations made tactile. Paint with mathematics.</p>
+    <div class="section-formula">$$\frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla)\mathbf{u} = -\frac{1}{\rho}\nabla p + \nu\nabla^2\mathbf{u}$$</div>
+  </div>
+  <div class="fluid-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="fluidCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="fluidCanvas">⛶</button>
+    </div>
+    <div class="panel">
+      <div class="ctrl-group">
+        <label>Viscosity <span id="viscVal">0.0001</span></label>
+        <input type="range" id="viscosity" min="0.00001" max="0.001" step="0.00001" value="0.0001" />
+      </div>
+      <div class="ctrl-group">
+        <label>Diffusion <span id="diffFVal">0.0001</span></label>
+        <input type="range" id="diffusion" min="0.00001" max="0.001" step="0.00001" value="0.0001" />
+      </div>
+      <div class="ctrl-group">
+        <label>Color Mode</label>
+        <select id="fluidColorMode">
+          <option value="velocity">Velocity Field</option>
+          <option value="pressure">Pressure</option>
+          <option value="vorticity">Vorticity</option>
+          <option value="dye">Dye Tracer</option>
+        </select>
+      </div>
+      <button id="fluidReset" class="ctrl-btn">⟳ Clear</button>
+      <button id="fluidVortex" class="ctrl-btn">🌀 Add Vortex</button>
+      <p class="hint-text">🖱 Move mouse to stir the fluid</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 9: HYPERBOLIC GEOMETRY ════════════════════ -->
+<section id="hyperbolic" class="section">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <h2>Hyperbolic Geometry</h2>
+    <p>Where parallel lines diverge and infinity lives at the boundary.</p>
+    <div class="section-formula">$$ds^2 = \frac{dx^2 + dy^2}{(1-x^2-y^2)^2}$$</div>
+  </div>
+  <div class="hyperbolic-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="hyperbolicCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="hyperbolicCanvas">⛶</button>
+    </div>
+    <div class="panel">
+      <div class="ctrl-group">
+        <label>Mode</label>
+        <select id="hyperbolicMode">
+          <option value="tessellation">Tessellation {p,q}</option>
+          <option value="geodesics">Geodesics</option>
+          <option value="tiling">Escher-like Tiling</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>p-gon sides p = <span id="hypPVal">7</span></label>
+        <input type="range" id="hypP" min="3" max="12" step="1" value="7" />
+      </div>
+      <div class="ctrl-group">
+        <label>At each vertex q = <span id="hypQVal">3</span></label>
+        <input type="range" id="hypQ" min="3" max="8" step="1" value="3" />
+      </div>
+      <div class="ctrl-group">
+        <label>Depth <span id="hypDepthVal">4</span></label>
+        <input type="range" id="hypDepth" min="1" max="7" step="1" value="4" />
+      </div>
+      <button id="hypRender" class="ctrl-btn active-btn">⟳ Render</button>
+      <p class="hint-text">🖱 Drag to navigate Poincaré disk</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 10: 4D GEOMETRY ════════════════════════════ -->
+<section id="fourd" class="section">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <h2>4D Geometry</h2>
+    <p>Projections of four-dimensional objects into our three-dimensional world.</p>
+  </div>
+  <div class="fourd-layout">
+    <div id="fourdContainer" class="canvas-fullscreen-wrap"></div>
+    <div class="panel">
+      <div class="ctrl-group">
+        <label>Object</label>
+        <select id="fourdObject">
+          <option value="tesseract">Tesseract (4D Cube)</option>
+          <option value="simplex">5-Cell (4-Simplex)</option>
+          <option value="cross">16-Cell (4D Cross)</option>
+          <option value="torus">Clifford Torus</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>XY Rotation <span id="xyRotVal">0°</span></label>
+        <input type="range" id="xyRot" min="0" max="360" value="0" />
+      </div>
+      <div class="ctrl-group">
+        <label>XW Rotation <span id="xwRotVal">0°</span></label>
+        <input type="range" id="xwRot" min="0" max="360" value="0" />
+      </div>
+      <div class="ctrl-group">
+        <label>YW Rotation <span id="ywRotVal">0°</span></label>
+        <input type="range" id="ywRot" min="0" max="360" value="0" />
+      </div>
+      <div class="ctrl-group">
+        <label>ZW Rotation <span id="zwRotVal">0°</span></label>
+        <input type="range" id="zwRot" min="0" max="360" value="0" />
+      </div>
+      <div class="ctrl-group">
+        <label>Auto-rotate
+          <label class="toggle-switch">
+            <input type="checkbox" id="fourdAuto" checked />
+            <span class="toggle-track"></span>
+          </label>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 11: NUMBER THEORY ═════════════════════════ -->
+<section id="numtheory" class="section">
+  <div class="section-header">
+    <span class="section-num">11</span>
+    <h2>Number Theory Visual Art</h2>
+    <p>The hidden music of integers revealed through geometry.</p>
+  </div>
+  <div class="numtheory-tabs">
+    <button class="ntab active" data-nt="modular">Modular Multiplication</button>
+    <button class="ntab" data-nt="collatz">Collatz Conjecture</button>
+    <button class="ntab" data-nt="prime_gap">Prime Gaps</button>
+    <button class="ntab" data-nt="totient">Euler's Totient</button>
+  </div>
+  <div class="numtheory-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="numtheoryCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="numtheoryCanvas">⛶</button>
+    </div>
+    <div class="panel" id="numtheoryCtrls">
+      <!-- injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 12: MATH SOUND ════════════════════════════ -->
+<section id="sound" class="section">
+  <div class="section-header">
+    <span class="section-num">12</span>
+    <h2>Mathematics → Sound</h2>
+    <p>Hear the shape of equations. Every function has a voice.</p>
+  </div>
+  <div class="sound-layout">
+    <canvas id="soundCanvas"></canvas>
+    <div class="panel">
+      <div class="ctrl-group">
+        <label>Waveform f(t) =</label>
+        <input type="text" id="soundExpr" value="Math.sin(2*Math.PI*440*t)" class="eq-input" style="width:100%;margin-top:0.4rem" />
+      </div>
+      <div class="preset-eqs">
+        <p class="preset-label">Sound Presets:</p>
+        <button class="spreset" data-fn="Math.sin(2*PI*440*t)">A 440Hz Sine</button>
+        <button class="spreset" data-fn="Math.sign(Math.sin(2*PI*440*t))">Square Wave</button>
+        <button class="spreset" data-fn="(2/PI)*Math.asin(Math.sin(2*PI*440*t))">Triangle</button>
+        <button class="spreset" data-fn="Math.sin(2*PI*440*t)+0.5*Math.sin(2*PI*880*t)">Harmonics</button>
+        <button class="spreset" data-fn="Math.sin(2*PI*(440+200*Math.sin(2*PI*3*t))*t)">FM Synth</button>
+        <button class="spreset" data-fn="Math.random()*2-1">White Noise</button>
+      </div>
+      <div class="ctrl-group">
+        <label>Volume <span id="soundVolVal">0.3</span></label>
+        <input type="range" id="soundVol" min="0" max="1" step="0.01" value="0.3" />
+      </div>
+      <div class="ctrl-group">
+        <label>Duration (s) <span id="soundDurVal">2</span></label>
+        <input type="range" id="soundDur" min="0.5" max="5" step="0.5" value="2" />
+      </div>
+      <button id="soundPlay" class="ctrl-btn active-btn">▶ Play Sound</button>
+      <button id="soundStop" class="ctrl-btn">■ Stop</button>
+      <div class="ctrl-group">
+        <label>Fourier Analysis</label>
+        <canvas id="fftCanvas" width="300" height="100" style="width:100%;border-radius:4px;background:#040408;margin-top:0.5rem"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 13: PLAYGROUND ════════════════════════════ -->
+<section id="playground" class="section">
+  <div class="section-header">
+    <span class="section-num">13</span>
+    <h2>Function Laboratory</h2>
+    <p>Manipulate parameters. Discover patterns. Your space to experiment.</p>
+  </div>
+  <div class="playground-layout">
+    <canvas id="playCanvas"></canvas>
+    <div class="playground-controls panel">
+      <div class="pg-formula" id="pgFormula">$$y = \sin(ax + b)\,e^{-cx}$$</div>
+      <div class="ctrl-group">
+        <label>a (freq) = <span id="pgAVal">1.0</span></label>
+        <input type="range" id="pgA" min="0.1" max="10" step="0.1" value="1" />
+      </div>
+      <div class="ctrl-group">
+        <label>b (phase) = <span id="pgBVal">0.0</span></label>
+        <input type="range" id="pgB" min="-6.28" max="6.28" step="0.1" value="0" />
+      </div>
+      <div class="ctrl-group">
+        <label>c (decay) = <span id="pgCVal">0.1</span></label>
+        <input type="range" id="pgC" min="0" max="1" step="0.01" value="0.1" />
+      </div>
+      <div class="ctrl-group">
+        <label>Mode</label>
+        <select id="pgMode">
+          <option value="cartesian">Cartesian y=f(x)</option>
+          <option value="polar">Polar r=f(θ)</option>
+          <option value="parametric">Parametric</option>
+          <option value="phase">Phase Portrait</option>
+        </select>
+      </div>
+      <button id="pgAnimate" class="ctrl-btn active-btn">⏸ Pause</button>
+      <button id="pgReset" class="ctrl-btn">⟳ Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 14: 3D SURFACES ════════════════════════════ -->
+<section id="surfaces" class="section">
+  <div class="section-header">
+    <span class="section-num">14</span>
+    <h2>3D Mathematical Surfaces</h2>
+    <p>Geometry that transcends three dimensions.</p>
+  </div>
+  <div class="surfaces-tabs">
+    <button class="stab active" data-surf="torus">Torus</button>
+    <button class="stab" data-surf="mobius">Möbius</button>
+    <button class="stab" data-surf="klein">Klein Bottle</button>
+    <button class="stab" data-surf="saddle">Saddle</button>
+    <button class="stab" data-surf="trefoil">Trefoil Knot</button>
+    <button class="stab" data-surf="roman">Roman Surface</button>
+  </div>
+  <div class="surfaces-layout">
+    <div id="threeContainer" class="canvas-fullscreen-wrap"></div>
+    <div class="surf-controls panel">
+      <div class="ctrl-group">
+        <label>Wireframe
+          <label class="toggle-switch">
+            <input type="checkbox" id="wireframeToggle" />
+            <span class="toggle-track"></span>
+          </label>
+        </label>
+      </div>
+      <div class="ctrl-group">
+        <label>Color Scheme</label>
+        <select id="surfColorScheme">
+          <option value="electric">Electric Blue</option>
+          <option value="aurora">Aurora</option>
+          <option value="volcanic">Volcanic</option>
+          <option value="chrome">Chrome</option>
+          <option value="iridescent">Iridescent</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>Speed <span id="rotSpeedVal">0.5</span></label>
+        <input type="range" id="rotSpeed" min="0" max="3" step="0.1" value="0.5" />
+      </div>
+      <div class="ctrl-group">
+        <label>Resolution <span id="segVal">64</span></label>
+        <input type="range" id="segSlider" min="8" max="128" step="8" value="64" />
+      </div>
+      <div class="surf-info" id="surfInfo"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 15: GALLERY ════════════════════════════════ -->
+<section id="gallery" class="section">
+  <div class="section-header">
+    <span class="section-num">15</span>
+    <h2>Mathematical Beauty Gallery</h2>
+    <p>Patterns that emerge from pure logic.</p>
+  </div>
+  <div class="gallery-tabs">
+    <button class="gtab active" data-gallery="voronoi">Voronoi</button>
+    <button class="gtab" data-gallery="cellular">Automata</button>
+    <button class="gtab" data-gallery="ifs">IFS Fractal</button>
+    <button class="gtab" data-gallery="chaos">Chaos Game</button>
+    <button class="gtab" data-gallery="lsystem">L-Systems</button>
+    <button class="gtab" data-gallery="artgen">Art Generator</button>
+  </div>
+  <div class="gallery-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="galleryCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="galleryCanvas">⛶</button>
+    </div>
+    <div class="gallery-controls panel">
+      <button id="regenerate" class="ctrl-btn active-btn">⟳ Regenerate</button>
+      <button id="downloadGallery" class="ctrl-btn">↓ Save PNG</button>
+      <div id="galleryCtrls"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-formula">$$\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi} \qquad \sum_{n=1}^{\infty}\frac{1}{n^2} = \frac{\pi^2}{6}$$</div>
+  <p class="footer-text">Mathematics — the language in which the Universe is written.</p>
+  <p class="footer-sub">∞ MathVerse • A CERN laboratory for mathematical beauty</p>
+</footer>
+
+<div id="tooltip" class="tooltip"></div>
+
+<!-- ══ WONDER NOTIFICATION ════════════════════════════════ -->
+<div id="wonderNotif" class="wonder-notif hidden"></div>
+
+<script src="js/main.js"></script>
+<script src="js/fractals.js"></script>
+<script src="js/graphs.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/surfaces.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/riemann.js"></script>
+<script src="js/complex.js"></script>
+<script src="js/reaction.js"></script>
+<script src="js/fluid.js"></script>
+<script src="js/hyperbolic.js"></script>
+<script src="js/fourd.js"></script>
+<script src="js/numtheory.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/universe.js"></script>
+<script src="js/global.js"></script>
+</body>
+</html>
