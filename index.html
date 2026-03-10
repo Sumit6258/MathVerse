@@ -36,6 +36,7 @@
   <div class="nav-logo">∞ MathVerse</div>
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
+    <li><a href="#mandelbulb">Advanced</a></li>
     <li><a href="#fractals">Fractals</a></li>
     <li><a href="#graph-explorer">Explore</a></li>
     <li><a href="#riemann">Riemann ζ</a></li>
@@ -743,6 +744,350 @@
   </div>
 </section>
 
+
+<!-- ══ ADV §16: MANDELBULB 3D ════════════════════════════ -->
+<section id="mandelbulb" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 01</span>
+    <h2>Mandelbulb — 3D Fractal</h2>
+    <p>Ray-marched 3D fractal sculpture — distance-estimated on the GPU.</p>
+    <div class="section-formula">$$|z_{n+1}| = |z_n|^n + c, \quad z,c \in \mathbb{R}^3$$</div>
+  </div>
+  <div class="adv-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="mandelbulbCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="mandelbulbCanvas">⛶</button>
+    </div>
+    <div class="panel adv-panel">
+      <div class="adv-formula-box">$$\text{DE}(p) = \frac{|p|\ln|p|}{2|p'|}$$</div>
+      <div class="ctrl-group"><label>Power n <span id="mbPowerVal">8</span></label><input type="range" id="mbPower" min="2" max="12" step="0.1" value="8"/></div>
+      <div class="ctrl-group"><label>Iterations <span id="mbIterVal">6</span></label><input type="range" id="mbIter" min="2" max="12" step="1" value="6"/></div>
+      <div class="ctrl-group"><label>Bailout <span id="mbBailVal">2.0</span></label><input type="range" id="mbBail" min="1" max="4" step="0.1" value="2"/></div>
+      <div class="ctrl-group"><label>Light Angle <span id="mbLightVal">45</span>°</label><input type="range" id="mbLight" min="0" max="360" step="5" value="45"/></div>
+      <div class="ctrl-group"><label>Color Palette</label><select id="mbPalette"><option value="cosmic">Cosmic</option><option value="lava">Lava</option><option value="ice">Ice</option><option value="gold">Gold</option></select></div>
+      <div class="ctrl-group"><label>Auto Rotate <label class="toggle-switch"><input type="checkbox" id="mbRotate" checked/><span class="toggle-track"></span></label></label></div>
+      <button id="mbSave" class="ctrl-btn">↓ Save Image</button>
+      <p class="hint-text">🖱 Drag to rotate · Scroll to zoom</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §17: QUATERNION JULIA ═════════════════════════ -->
+<section id="quatjulia" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 02</span>
+    <h2>Quaternion Julia Set</h2>
+    <p>A 4D fractal rendered as a 3D cross-section via GPU ray marching.</p>
+    <div class="section-formula">$$q_{n+1} = q_n^2 + c, \quad q,c \in \mathbb{H}$$</div>
+  </div>
+  <div class="adv-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="quatCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="quatCanvas">⛶</button>
+    </div>
+    <div class="panel adv-panel">
+      <div class="adv-formula-box">$$\mathbb{H} = \{a+bi+cj+dk\}$$</div>
+      <div class="ctrl-group"><label>c.r <span id="qcr">-0.20</span></label><input type="range" id="quatCR" min="-1" max="1" step="0.01" value="-0.2"/></div>
+      <div class="ctrl-group"><label>c.i <span id="qci">0.40</span></label><input type="range" id="quatCI" min="-1" max="1" step="0.01" value="0.4"/></div>
+      <div class="ctrl-group"><label>c.j <span id="qcj">0.10</span></label><input type="range" id="quatCJ" min="-1" max="1" step="0.01" value="0.1"/></div>
+      <div class="ctrl-group"><label>c.k <span id="qck">0.00</span></label><input type="range" id="quatCK" min="-1" max="1" step="0.01" value="0"/></div>
+      <div class="ctrl-group"><label>Slice W <span id="qsW">0.00</span></label><input type="range" id="quatSlice" min="-1" max="1" step="0.01" value="0"/></div>
+      <div class="ctrl-group"><label>Iterations <span id="qiVal">8</span></label><input type="range" id="quatIter" min="3" max="16" step="1" value="8"/></div>
+      <select id="quatPal" style="width:100%;margin-top:0.5rem"><option value="fire">Fire</option><option value="ice">Ice</option><option value="alien">Alien</option></select>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §18: MINIMAL SURFACES ════════════════════════ -->
+<section id="minimal" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 03</span>
+    <h2>Minimal Surfaces</h2>
+    <p>Zero mean curvature — nature's most efficient geometries.</p>
+    <div class="section-formula">$$H = \frac{\kappa_1 + \kappa_2}{2} = 0$$</div>
+  </div>
+  <div class="adv-layout">
+    <div id="minimalContainer" class="canvas-fullscreen-wrap"></div>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Surface</label><select id="minimalType"><option value="gyroid">Gyroid</option><option value="costa">Costa Surface</option><option value="enneper">Enneper Surface</option><option value="schwarz">Schwarz P</option><option value="catenoid">Catenoid</option></select></div>
+      <div class="ctrl-group"><label>Resolution <span id="minResVal">60</span></label><input type="range" id="minRes" min="20" max="120" step="10" value="60"/></div>
+      <div class="ctrl-group"><label>Color by Curvature <label class="toggle-switch"><input type="checkbox" id="minCurv" checked/><span class="toggle-track"></span></label></label></div>
+      <div class="ctrl-group"><label>Wireframe <label class="toggle-switch"><input type="checkbox" id="minWire"/><span class="toggle-track"></span></label></label></div>
+      <div class="ctrl-group"><label>Metalness <span id="minMetalVal">0.8</span></label><input type="range" id="minMetal" min="0" max="1" step="0.05" value="0.8"/></div>
+      <div class="adv-info" id="minInfo"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §19: HOPF FIBRATION ══════════════════════════ -->
+<section id="hopf" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 04</span>
+    <h2>Hopf Fibration</h2>
+    <p>The beautiful fiber bundle S¹ → S³ → S² discovered by Heinz Hopf in 1931.</p>
+    <div class="section-formula">$$\pi: S^3 \to S^2, \quad \pi^{-1}(p) \cong S^1$$</div>
+  </div>
+  <div class="adv-layout">
+    <div id="hopfContainer" class="canvas-fullscreen-wrap"></div>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Fiber Count <span id="hopfCountVal">32</span></label><input type="range" id="hopfCount" min="8" max="80" step="4" value="32"/></div>
+      <div class="ctrl-group"><label>Base Point Latitude <span id="hopfLatVal">0</span>°</label><input type="range" id="hopfLat" min="-80" max="80" step="5" value="0"/></div>
+      <div class="ctrl-group"><label>Torus Radius <span id="hopfRVal">1.5</span></label><input type="range" id="hopfR" min="0.5" max="2.5" step="0.1" value="1.5"/></div>
+      <div class="ctrl-group"><label>Animation Speed <span id="hopfSpeedVal">0.5</span></label><input type="range" id="hopfSpeed" min="0" max="2" step="0.1" value="0.5"/></div>
+      <div class="ctrl-group"><label>Show Base S² <label class="toggle-switch"><input type="checkbox" id="hopfBase" checked/><span class="toggle-track"></span></label></label></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §20: GEODESIC FLOW ═══════════════════════════ -->
+<section id="geodesic" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 05</span>
+    <h2>Geodesic Flow</h2>
+    <p>Shortest paths on curved surfaces — the generalisation of straight lines.</p>
+    <div class="section-formula">$$\ddot{\gamma}^k + \Gamma^k_{ij}\dot{\gamma}^i\dot{\gamma}^j = 0$$</div>
+  </div>
+  <div class="adv-layout">
+    <div id="geodesicContainer" class="canvas-fullscreen-wrap"></div>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Surface</label><select id="geodesicSurf"><option value="sphere">Sphere</option><option value="torus">Torus</option><option value="saddle">Hyperbolic Paraboloid</option></select></div>
+      <div class="ctrl-group"><label>Geodesic Count <span id="geoCountVal">16</span></label><input type="range" id="geoCount" min="4" max="48" step="4" value="16"/></div>
+      <div class="ctrl-group"><label>Trail Length <span id="geoLenVal">200</span></label><input type="range" id="geoLen" min="50" max="600" step="50" value="200"/></div>
+      <div class="ctrl-group"><label>Speed <span id="geoSpeedVal">1.0</span></label><input type="range" id="geoSpeed" min="0.2" max="3" step="0.1" value="1"/></div>
+      <button id="geoReset" class="ctrl-btn active-btn">⟳ Reset Geodesics</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §21: RIEMANN SURFACE ═════════════════════════ -->
+<section id="riemannsurf" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 06</span>
+    <h2>Riemann Surface Visualizer</h2>
+    <p>Multi-sheeted surfaces that resolve branch cuts of complex functions.</p>
+    <div class="section-formula">$$w = f(z), \quad z \in \mathbb{C}$$</div>
+  </div>
+  <div class="adv-layout">
+    <div id="riemannSurfContainer" class="canvas-fullscreen-wrap"></div>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Function</label><select id="rsFunc"><option value="sqrt">w = √z</option><option value="log">w = log(z)</option><option value="cbrt">w = z^(1/3)</option><option value="arccosh">w = arccosh(z)</option></select></div>
+      <div class="ctrl-group"><label>Sheets <span id="rsSheetsVal">3</span></label><input type="range" id="rsSheets" min="2" max="6" step="1" value="3"/></div>
+      <div class="ctrl-group"><label>Grid Density <span id="rsGridVal">40</span></label><input type="range" id="rsGrid" min="20" max="80" step="5" value="40"/></div>
+      <div class="ctrl-group"><label>Sheet Separation <span id="rsSepVal">0.8</span></label><input type="range" id="rsSep" min="0.2" max="2" step="0.1" value="0.8"/></div>
+      <div class="ctrl-group"><label>Color by Phase <label class="toggle-switch"><input type="checkbox" id="rsPhase" checked/><span class="toggle-track"></span></label></label></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §22: CALABI-YAU ══════════════════════════════ -->
+<section id="calabiyau" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 07</span>
+    <h2>Calabi-Yau Manifold</h2>
+    <p>Compact Kähler manifolds with vanishing first Chern class — the extra dimensions of string theory.</p>
+    <div class="section-formula">$$\Omega_{ij} = \frac{\partial^2 K}{\partial z^i \partial \bar{z}^j}$$</div>
+  </div>
+  <div class="adv-layout">
+    <div id="cyContainer" class="canvas-fullscreen-wrap"></div>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>n parameter <span id="cyNVal">3</span></label><input type="range" id="cyN" min="2" max="6" step="1" value="3"/></div>
+      <div class="ctrl-group"><label>Morph Speed <span id="cyMorphVal">0.5</span></label><input type="range" id="cyMorph" min="0" max="2" step="0.1" value="0.5"/></div>
+      <div class="ctrl-group"><label>Color Flow <span id="cyColorVal">1.0</span></label><input type="range" id="cyColor" min="0" max="3" step="0.1" value="1"/></div>
+      <div class="ctrl-group"><label>Resolution <span id="cyResVal">50</span></label><input type="range" id="cyRes" min="20" max="80" step="5" value="50"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §23: SCHRÖDINGER ══════════════════════════════ -->
+<section id="schrodinger" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 08</span>
+    <h2>Schrödinger Wave Function</h2>
+    <p>Quantum wave packet evolution — probability density, interference, tunneling.</p>
+    <div class="section-formula">$$i\hbar\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2\psi}{\partial x^2} + V(x)\psi$$</div>
+  </div>
+  <div class="adv-layout">
+    <canvas id="schrodCanvas"></canvas>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Potential Well</label><select id="schPotential"><option value="free">Free Particle</option><option value="box">Infinite Box</option><option value="barrier">Tunneling Barrier</option><option value="harmonic">Harmonic Oscillator</option><option value="double">Double Well</option></select></div>
+      <div class="ctrl-group"><label>Initial Momentum <span id="schMomVal">5</span></label><input type="range" id="schMom" min="-15" max="15" step="1" value="5"/></div>
+      <div class="ctrl-group"><label>Wave Width σ <span id="schSigVal">30</span></label><input type="range" id="schSig" min="10" max="80" step="5" value="30"/></div>
+      <div class="ctrl-group"><label>Barrier Height <span id="schBarVal">0.5</span></label><input type="range" id="schBar" min="0" max="2" step="0.05" value="0.5"/></div>
+      <button id="schReset" class="ctrl-btn active-btn">⟳ Reset Packet</button>
+      <div class="adv-legend">
+        <span style="color:#00c8ff">▬ |ψ|²</span>&nbsp;&nbsp;
+        <span style="color:#ffd700">▬ Re(ψ)</span>&nbsp;&nbsp;
+        <span style="color:#bf5af2">▬ Im(ψ)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §24: SPHERICAL HARMONICS ═════════════════════ -->
+<section id="sharmonics" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 09</span>
+    <h2>Spherical Harmonics</h2>
+    <p>The eigenfunctions of the angular Laplacian — atomic orbitals, gravitational fields.</p>
+    <div class="section-formula">$$Y_l^m(\theta,\phi) = \sqrt{\frac{(2l+1)(l-|m|)!}{4\pi(l+|m|)!}}P_l^m(\cos\theta)e^{im\phi}$$</div>
+  </div>
+  <div class="adv-layout">
+    <div id="shContainer" class="canvas-fullscreen-wrap"></div>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Degree l <span id="shLVal">2</span></label><input type="range" id="shL" min="0" max="6" step="1" value="2"/></div>
+      <div class="ctrl-group"><label>Order m <span id="shMVal">1</span></label><input type="range" id="shM" min="-6" max="6" step="1" value="1"/></div>
+      <div class="ctrl-group"><label>Animation Speed <span id="shSpeedVal">1.0</span></label><input type="range" id="shSpeed" min="0" max="3" step="0.1" value="1"/></div>
+      <div class="ctrl-group"><label>Color by Phase <label class="toggle-switch"><input type="checkbox" id="shPhase" checked/><span class="toggle-track"></span></label></label></div>
+      <div class="ctrl-group"><label>Superposition <label class="toggle-switch"><input type="checkbox" id="shSuper"/><span class="toggle-track"></span></label></label></div>
+      <div class="adv-info" id="shInfo"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §25: MONTE CARLO PI ══════════════════════════ -->
+<section id="montecarlo" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 10</span>
+    <h2>Monte Carlo π Estimation</h2>
+    <p>Stochastic geometry — estimating π through random sampling.</p>
+    <div class="section-formula">$$\pi \approx 4 \cdot \frac{\text{points inside circle}}{\text{total points}}$$</div>
+  </div>
+  <div class="adv-layout">
+    <canvas id="mcCanvas"></canvas>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Points/Frame <span id="mcRateVal">100</span></label><input type="range" id="mcRate" min="10" max="1000" step="10" value="100"/></div>
+      <div class="ctrl-group"><label>Point Size <span id="mcSzVal">2</span></label><input type="range" id="mcSz" min="1" max="5" step="0.5" value="2"/></div>
+      <button id="mcReset" class="ctrl-btn active-btn">⟳ Reset</button>
+      <div class="mc-stats">
+        <div class="mc-stat"><span class="mc-label">Total Points</span><span class="mc-val" id="mcTotal">0</span></div>
+        <div class="mc-stat"><span class="mc-label">Inside Circle</span><span class="mc-val" id="mcInside">0</span></div>
+        <div class="mc-stat"><span class="mc-label">π ≈</span><span class="mc-val mc-pi" id="mcPi">—</span></div>
+        <div class="mc-stat"><span class="mc-label">Error</span><span class="mc-val" id="mcError">—</span></div>
+      </div>
+      <canvas id="mcConverge" width="240" height="120" style="width:100%;border-radius:5px;background:#030307;margin-top:0.75rem"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §26: LYAPUNOV FRACTAL ════════════════════════ -->
+<section id="lyapunov" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 11</span>
+    <h2>Lyapunov Fractal</h2>
+    <p>Stability and chaos revealed by the Lyapunov exponent heatmap.</p>
+    <div class="section-formula">$$\lambda = \lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1}\ln\left|f'(x_n)\right|$$</div>
+  </div>
+  <div class="adv-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="lyapCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="lyapCanvas">⛶</button>
+    </div>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Sequence</label><input type="text" id="lyapSeq" value="AABAB" class="eq-input" style="width:100%;margin-top:0.4rem"/></div>
+      <div class="ctrl-group"><label>a Range [min <span id="lyapAMinV">2</span>, max <span id="lyapAMaxV">4</span>]</label>
+        <input type="range" id="lyapAMin" min="0" max="4" step="0.1" value="2"/>
+        <input type="range" id="lyapAMax" min="0" max="4" step="0.1" value="4" style="margin-top:0.3rem"/>
+      </div>
+      <div class="ctrl-group"><label>b Range [<span id="lyapBMinV">2</span>, <span id="lyapBMaxV">4</span>]</label>
+        <input type="range" id="lyapBMin" min="0" max="4" step="0.1" value="2"/>
+        <input type="range" id="lyapBMax" min="0" max="4" step="0.1" value="4" style="margin-top:0.3rem"/>
+      </div>
+      <div class="ctrl-group"><label>Iterations <span id="lyapIterV">200</span></label><input type="range" id="lyapIter" min="50" max="500" step="50" value="200"/></div>
+      <button id="lyapRender" class="ctrl-btn active-btn">⟳ Render Fractal</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §27: KURAMOTO OSCILLATORS ═══════════════════ -->
+<section id="kuramoto" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 12</span>
+    <h2>Kuramoto Oscillator Network</h2>
+    <p>Spontaneous synchronization — how fireflies, neurons, and clocks align.</p>
+    <div class="section-formula">$$\dot{\theta}_i = \omega_i + \frac{K}{N}\sum_{j=1}^{N}\sin(\theta_j - \theta_i)$$</div>
+  </div>
+  <div class="adv-layout">
+    <canvas id="kuramotoCanvas"></canvas>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Oscillators N <span id="kurNVal">40</span></label><input type="range" id="kurN" min="10" max="100" step="5" value="40"/></div>
+      <div class="ctrl-group"><label>Coupling K <span id="kurKVal">2.0</span></label><input type="range" id="kurK" min="0" max="6" step="0.1" value="2"/></div>
+      <div class="ctrl-group"><label>Freq Spread σ <span id="kurSigVal">1.0</span></label><input type="range" id="kurSig" min="0.1" max="3" step="0.1" value="1"/></div>
+      <button id="kurReset" class="ctrl-btn active-btn">⟳ Reset</button>
+      <div class="mc-stats">
+        <div class="mc-stat"><span class="mc-label">Order Parameter r</span><span class="mc-val mc-pi" id="kurOrder">0.00</span></div>
+        <div class="mc-stat"><span class="mc-label">Sync State</span><span class="mc-val" id="kurSync">Incoherent</span></div>
+      </div>
+      <canvas id="kurOrderPlot" width="240" height="100" style="width:100%;border-radius:5px;background:#030307;margin-top:0.75rem"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §28: BOIDS + CHAOS ════════════════════════════ -->
+<section id="boids" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 13</span>
+    <h2>Boids + Chaotic Attractors</h2>
+    <p>Emergent flocking shaped by underlying strange attractors.</p>
+    <div class="section-formula">$$\mathbf{v}_i \leftarrow \mathbf{v}_i + \alpha\mathbf{s}_i + \beta\mathbf{a}_i + \gamma\mathbf{c}_i + \delta\mathbf{f}_{\text{attractor}}$$</div>
+  </div>
+  <div class="adv-layout">
+    <canvas id="boidsCanvas"></canvas>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Boid Count <span id="boidNVal">200</span></label><input type="range" id="boidN" min="50" max="600" step="50" value="200"/></div>
+      <div class="ctrl-group"><label>Attractor</label><select id="boidAttract"><option value="none">None (Pure Boids)</option><option value="lorenz">Lorenz</option><option value="rossler">Rössler</option><option value="thomas">Thomas</option></select></div>
+      <div class="ctrl-group"><label>Chaos Strength <span id="boidChaosVal">0.3</span></label><input type="range" id="boidChaos" min="0" max="1" step="0.05" value="0.3"/></div>
+      <div class="ctrl-group"><label>Vision Radius <span id="boidVisionVal">60</span></label><input type="range" id="boidVision" min="20" max="150" step="10" value="60"/></div>
+      <div class="ctrl-group"><label>Trail Length <span id="boidTrailVal">20</span></label><input type="range" id="boidTrail" min="0" max="60" step="5" value="20"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §29: CELLULAR AUTOMATA UNIVERSE ══════════════ -->
+<section id="cellautomata" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 14</span>
+    <h2>Cellular Automata Universe</h2>
+    <p>Complex behavior from brutally simple rules — Conway, Langton, Wireworld.</p>
+  </div>
+  <div class="adv-layout">
+    <div class="canvas-fullscreen-wrap">
+      <canvas id="caCanvas"></canvas>
+      <button class="fullscreen-icon" data-target="caCanvas">⛶</button>
+    </div>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Rule</label><select id="caRule"><option value="life">Conway's Game of Life</option><option value="brians">Brian's Brain</option><option value="langton">Langton's Ant</option><option value="wireworld">Wireworld</option><option value="rule110">Rule 110 (1D)</option></select></div>
+      <div class="ctrl-group"><label>Speed <span id="caSpeedVal">15</span> fps</label><input type="range" id="caSpeed" min="1" max="60" step="1" value="15"/></div>
+      <div class="ctrl-group"><label>Cell Size <span id="caCellVal">6</span>px</label><input type="range" id="caCell" min="2" max="16" step="1" value="6"/></div>
+      <div class="ctrl-group"><label>Draw Mode</label><select id="caDrawMode"><option value="alive">Draw Alive</option><option value="dead">Erase</option><option value="wire">Wire (Wireworld)</option><option value="head">Electron Head</option></select></div>
+      <button id="caStep" class="ctrl-btn">▶ Step</button>
+      <button id="caPause" class="ctrl-btn active-btn">⏸ Pause</button>
+      <button id="caReset" class="ctrl-btn">⟳ Random Seed</button>
+      <button id="caClear" class="ctrl-btn">☐ Clear</button>
+      <p class="hint-text">🖱 Click/drag to draw on grid</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADV §30: CURVATURE FLOW ══════════════════════════ -->
+<section id="curvflow" class="section adv-section">
+  <div class="section-header">
+    <span class="section-num adv-num">ADV 15</span>
+    <h2>Mean Curvature Flow</h2>
+    <p>Shapes evolving toward spheres — the geometric heat equation.</p>
+    <div class="section-formula">$$\frac{\partial X}{\partial t} = H\mathbf{n}, \quad H = -\nabla \cdot \hat{n}$$</div>
+  </div>
+  <div class="adv-layout">
+    <canvas id="curvCanvas"></canvas>
+    <div class="panel adv-panel">
+      <div class="ctrl-group"><label>Initial Shape</label><select id="curvShape"><option value="star">Star Polygon</option><option value="ellipse">Ellipse</option><option value="gear">Gear</option><option value="random">Random Blob</option></select></div>
+      <div class="ctrl-group"><label>Flow Speed <span id="curvSpeedVal">0.5</span></label><input type="range" id="curvSpeed" min="0.05" max="2" step="0.05" value="0.5"/></div>
+      <div class="ctrl-group"><label>Color by Curvature <label class="toggle-switch"><input type="checkbox" id="curvColorOn" checked/><span class="toggle-track"></span></label></label></div>
+      <button id="curvReset" class="ctrl-btn active-btn">⟳ Reset</button>
+      <p class="hint-text">Watch as any shape smoothly deforms toward a circle (sphere in 3D)</p>
+    </div>
+  </div>
+</section>
+
 <!-- ══ FOOTER ═════════════════════════════════════════════ -->
 <footer>
   <div class="footer-formula">$$\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi} \qquad \sum_{n=1}^{\infty}\frac{1}{n^2} = \frac{\pi^2}{6}$$</div>
@@ -782,5 +1127,45 @@
 <script src="js/sound.js"></script>
 <script src="js/universe.js"></script>
 <script src="js/global.js"></script>
+
+<script src="js/adv01_mandelbulb.js"></script>
+<script src="js/adv02_quatjulia.js"></script>
+<script src="js/adv03_minimal.js"></script>
+<script src="js/adv04_hopf.js"></script>
+<script src="js/adv05_geodesic.js"></script>
+<script src="js/adv06_riemannsurf.js"></script>
+<script src="js/adv07_calabiyau.js"></script>
+<script src="js/adv08_schrodinger.js"></script>
+<script src="js/adv09_sharmonics.js"></script>
+<script src="js/adv10_montecarlo.js"></script>
+<script src="js/adv11_lyapunov.js"></script>
+<script src="js/adv12_kuramoto.js"></script>
+<script src="js/adv13_boids.js"></script>
+<script src="js/adv14_cellautomata.js"></script>
+<script src="js/adv15_curvflow.js"></script>
+
+<!-- Discovery Mode FAB -->
+<button class="discovery-fab" id="discoveryBtn">
+  <span>🔭</span> Discover Mathematics
+</button>
+<script>
+(function(){
+  const sections=['mandelbulb','quatjulia','minimal','hopf','geodesic','riemannsurf',
+    'calabiyau','schrodinger','sharmonics','montecarlo','lyapunov','kuramoto',
+    'boids','cellautomata','curvflow','fractals','animations','riemann','complex',
+    'reaction','fluid','hyperbolic','fourd','numtheory','famous'];
+  document.getElementById('discoveryBtn')?.addEventListener('click',()=>{
+    const id=sections[Math.floor(Math.random()*sections.length)];
+    const el=document.getElementById(id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});}
+    const notif=document.getElementById('wonderNotif');
+    if(notif){
+      notif.textContent='🔭 Exploring: '+id.charAt(0).toUpperCase()+id.slice(1);
+      notif.classList.remove('hidden');
+      setTimeout(()=>notif.classList.add('hidden'),2500);
+    }
+  });
+})();
+</script>
 </body>
 </html>
