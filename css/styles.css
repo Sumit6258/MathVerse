@@ -519,3 +519,31 @@ footer{text-align:center;padding:4rem 2rem;border-top:1px solid var(--border);
   display: flex; align-items: center; gap: 0.5rem;
 }
 .discovery-fab:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(191,90,242,0.6); }
+
+/* ═══════════════════════════════════════════════
+   GENERATIVE ART SECTIONS
+   ═══════════════════════════════════════════════ */
+.art-divider-section { padding: 4rem 2rem; text-align: center; }
+.art-divider-inner { display: flex; align-items: center; gap: 2rem; max-width: 900px; margin: 0 auto; }
+.art-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(191,90,242,0.4), transparent); }
+.art-divider-content { text-align: center; min-width: 320px; }
+.art-divider-icon { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+.art-divider-title { font-family: var(--font-display); font-size: 1.8rem; background: linear-gradient(135deg,#bf5af2,#00c8ff,#ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.4rem; }
+.art-divider-sub { color: var(--text3); font-family: var(--font-body); font-size: 0.95rem; margin-bottom: 1rem; }
+.art-mode-toggle { display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; color: var(--purple); }
+.art-mode-label { user-select: none; }
+
+/* Art section styling */
+.art-section { border-top: 1px solid rgba(191,90,242,0.08); position: relative; }
+.art-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(191,90,242,0.03) 0%, transparent 60%); pointer-events: none; }
+.art-num { background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(191,90,242,0.08)); border-color: rgba(255,215,0,0.3); color: var(--gold); }
+.art-layout { display: grid; grid-template-columns: 1fr 280px; gap: 1.5rem; align-items: start; }
+.art-canvas-wrap { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(191,90,242,0.15); box-shadow: 0 0 40px rgba(191,90,242,0.08); }
+.art-canvas-wrap canvas { width: 100%; height: 540px; display: block; background: #020205; }
+.art-panel { position: sticky; top: 70px; }
+
+/* Art Mode bloom overlay */
+body.art-mode-on .art-canvas-wrap { box-shadow: 0 0 80px rgba(191,90,242,0.25), 0 0 20px rgba(0,200,255,0.1); }
+body.art-mode-on .art-section::before { background: radial-gradient(ellipse at 50% 0%, rgba(191,90,242,0.06) 0%, transparent 60%); }
+
+@media(max-width:900px){ .art-layout{ grid-template-columns:1fr; } .art-panel{ position:static; } }

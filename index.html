@@ -1088,6 +1088,239 @@
   </div>
 </section>
 
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- ══  GENERATIVE ART SECTION DIVIDER  ═══════════════ -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section id="artMode" class="art-divider-section">
+  <div class="art-divider-inner">
+    <div class="art-divider-line"></div>
+    <div class="art-divider-content">
+      <span class="art-divider-icon">🎨</span>
+      <h2 class="art-divider-title">Mathematical Generative Art</h2>
+      <p class="art-divider-sub">Where pure mathematics becomes digital poetry</p>
+      <label class="art-mode-toggle">
+        <input type="checkbox" id="artModeToggle"/>
+        <span class="art-mode-label">✦ Art Mode — Bloom &amp; Glow</span>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <div class="art-divider-line"></div>
+  </div>
+</section>
+
+<!-- ══ ART 01: COSMIC FRACTAL NEBULA ═══════════════════ -->
+<section id="cosmicNebula" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 01</span>
+    <h2>Cosmic Fractal Nebula</h2>
+    <p>Fractal Brownian Motion sculpting an infinite mathematical galaxy.</p>
+    <div class="section-formula">$$	ext{fBm}(x) = \sum_{k=0}^{n} rac{1}{2^k}\,	ext{noise}(2^k x)$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap" id="nebula-wrap">
+      <canvas id="nebulaCanvas"></canvas>
+    </div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Octaves <span id="nebOctVal">7</span></label><input type="range" id="nebOct" min="1" max="12" step="1" value="7"/></div>
+      <div class="ctrl-group"><label>Warp Strength <span id="nebWarpVal">1.5</span></label><input type="range" id="nebWarp" min="0" max="3" step="0.1" value="1.5"/></div>
+      <div class="ctrl-group"><label>Zoom Speed <span id="nebZoomVal">0.3</span></label><input type="range" id="nebZoom" min="0" max="1" step="0.05" value="0.3"/></div>
+      <div class="ctrl-group"><label>Color Theme</label><select id="nebColor"><option value="nebula">Nebula</option><option value="aurora">Aurora</option><option value="fire">Solar Flare</option><option value="void">Void</option></select></div>
+      <button id="nebSave" class="ctrl-btn">↓ Export PNG</button>
+      <p class="hint-text">🖱 Move mouse to warp space</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 02: FOURIER FLOW FIELD ═══════════════════════ -->
+<section id="fourierFlow" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 02</span>
+    <h2>Fourier Flow Field</h2>
+    <p>Thousands of luminous particles surfing a Fourier-series vector field.</p>
+    <div class="section-formula">$$\mathbf{v}(x,y) = \sum_{k=1}^{n} A_k\sin(a_k x + b_k y + \phi_k)$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap"><canvas id="flowCanvas"></canvas></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Harmonics <span id="flowHarmVal">6</span></label><input type="range" id="flowHarm" min="1" max="16" step="1" value="6"/></div>
+      <div class="ctrl-group"><label>Particles <span id="flowPartVal">4000</span></label><input type="range" id="flowPart" min="500" max="12000" step="500" value="4000"/></div>
+      <div class="ctrl-group"><label>Trail Decay <span id="flowDecayVal">0.97</span></label><input type="range" id="flowDecay" min="0.8" max="0.999" step="0.001" value="0.97"/></div>
+      <div class="ctrl-group"><label>Speed <span id="flowSpeedVal">1.0</span></label><input type="range" id="flowSpeed" min="0.1" max="3" step="0.1" value="1"/></div>
+      <button id="flowRegen" class="ctrl-btn active-btn">⟳ New Field</button>
+      <p class="hint-text">🖱 Click to seed particles</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 03: TOPOLOGICAL MORPHING SCULPTURE ══════════ -->
+<section id="topoSculpture" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 03</span>
+    <h2>Topological Morphing Sculpture</h2>
+    <p>A 3D manifold continuously transforming between topological identities.</p>
+    <div class="section-formula">$$\gamma(t) = (1-t)\,\mathbf{S}^2 + t\,\mathbf{T}^2 	o \mathbf{K}_{3,3}$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap" id="topoContainer"></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Shape</label><select id="topoShape"><option value="auto">Auto Morph</option><option value="sphere">Sphere</option><option value="torus">Torus</option><option value="trefoil">Trefoil Knot</option><option value="figure8">Figure-8 Knot</option><option value="klein">Klein Bottle</option><option value="mobius">Möbius Strip</option></select></div>
+      <div class="ctrl-group"><label>Morph Speed <span id="topoSpeedVal">0.5</span></label><input type="range" id="topoSpeed" min="0" max="2" step="0.05" value="0.5"/></div>
+      <div class="ctrl-group"><label>Glow Intensity <span id="topoGlowVal">1.0</span></label><input type="range" id="topoGlow" min="0" max="2" step="0.1" value="1"/></div>
+      <div class="ctrl-group"><label>Wireframe <label class="toggle-switch"><input type="checkbox" id="topoWire"/><span class="toggle-track"></span></label></label></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 04: CHAOTIC ATTRACTOR CLOUD ══════════════════ -->
+<section id="attractorCloud" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 04</span>
+    <h2>Chaotic Attractor Particle Cloud</h2>
+    <p>Millions of luminous particles accumulating on strange attractors.</p>
+    <div class="section-formula">$$\dot{x}=\sigma(y-x),\quad \dot{y}=x(
+ho-z)-y,\quad \dot{z}=xy-eta z$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap" id="attractorContainer"></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Attractor</label><select id="attractorType"><option value="lorenz">Lorenz</option><option value="rossler">Rössler</option><option value="aizawa">Aizawa</option><option value="dadras">Dadras</option><option value="halvorsen">Halvorsen</option></select></div>
+      <div class="ctrl-group"><label>Particle Count <span id="attrPartVal">50000</span></label><input type="range" id="attrPart" min="10000" max="200000" step="10000" value="50000"/></div>
+      <div class="ctrl-group"><label>Glow Size <span id="attrGlowVal">2.0</span></label><input type="range" id="attrGlow" min="0.5" max="5" step="0.1" value="2"/></div>
+      <div class="ctrl-group"><label>Color Mode</label><select id="attrColor"><option value="velocity">Velocity</option><option value="time">Time</option><option value="depth">Depth</option></select></div>
+      <button id="attrReset" class="ctrl-btn active-btn">⟳ Scatter</button>
+      <p class="hint-text">🖱 Drag to orbit · Scroll to zoom</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 05: KALEIDOSCOPE ══════════════════════════════ -->
+<section id="kaleidoscope" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 05</span>
+    <h2>Recursive Geometric Kaleidoscope</h2>
+    <p>Complex-number rotations and reflection groups generating infinite symmetry.</p>
+    <div class="section-formula">$$z \mapsto rac{az+b}{cz+d}, \quad egin{pmatrix}a&b\c&d\end{pmatrix}\in	ext{PSL}(2,\mathbb{Z})$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap"><canvas id="kaleidoCanvas"></canvas></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Symmetry Order <span id="kalNVal">6</span></label><input type="range" id="kalN" min="3" max="16" step="1" value="6"/></div>
+      <div class="ctrl-group"><label>Recursion Depth <span id="kalDepthVal">4</span></label><input type="range" id="kalDepth" min="1" max="7" step="1" value="4"/></div>
+      <div class="ctrl-group"><label>Rotation Speed <span id="kalSpeedVal">0.5</span></label><input type="range" id="kalSpeed" min="0" max="2" step="0.05" value="0.5"/></div>
+      <div class="ctrl-group"><label>Pattern</label><select id="kalPattern"><option value="flower">Flower</option><option value="islamic">Islamic Star</option><option value="mandala">Mandala</option><option value="snowflake">Snowflake</option></select></div>
+      <p class="hint-text">🖱 Move mouse to rotate axis</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 06: COMPLEX DOMAIN COLORING ART ══════════════ -->
+<section id="domainArt" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 06</span>
+    <h2>Complex Domain Coloring Art</h2>
+    <p>Phase portraits of complex functions rendered as psychedelic living art.</p>
+    <div class="section-formula">$$f(z) = rac{z^6 - 1}{z^4 + 0.5}, \quad rg(f(z)) 	o 	ext{hue}$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap"><canvas id="domainCanvas"></canvas></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Function</label><select id="domainFunc"><option value="sinz">sin(z)</option><option value="expz">exp(z)</option><option value="zetaish">z⁶−1 / z⁴+c</option><option value="tanz">tan(z)</option><option value="z3minus1">z³ − 1 (Newton)</option><option value="gamma">Γ-like poles</option></select></div>
+      <div class="ctrl-group"><label>Animate Speed <span id="domSpeedVal">0.5</span></label><input type="range" id="domSpeed" min="0" max="2" step="0.05" value="0.5"/></div>
+      <div class="ctrl-group"><label>Glow Rings <label class="toggle-switch"><input type="checkbox" id="domGlow" checked/><span class="toggle-track"></span></label></label></div>
+      <div class="ctrl-group"><label>Zoom <span id="domZoomVal">1.0</span></label><input type="range" id="domZoom" min="0.2" max="5" step="0.1" value="1"/></div>
+      <p class="hint-text">🖱 Click to recenter · Scroll to zoom</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 07: FRACTAL TREE ECOSYSTEM ═══════════════════ -->
+<section id="fractalForest" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 07</span>
+    <h2>Fractal Tree Ecosystem</h2>
+    <p>L-system forests growing, branching, and breathing with mathematical wind.</p>
+    <div class="section-formula">$$F 	o FF\!-\!\!\left[\!-F\!+F\!+F\!
+ight]\!+\!\left[\!+F\!-F\!-F\!
+ight]$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap"><canvas id="forestCanvas"></canvas></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Tree Count <span id="forestCountVal">5</span></label><input type="range" id="forestCount" min="1" max="12" step="1" value="5"/></div>
+      <div class="ctrl-group"><label>L-System Depth <span id="forestDepthVal">7</span></label><input type="range" id="forestDepth" min="3" max="10" step="1" value="7"/></div>
+      <div class="ctrl-group"><label>Branch Angle <span id="forestAngleVal">25</span>°</label><input type="range" id="forestAngle" min="10" max="50" step="1" value="25"/></div>
+      <div class="ctrl-group"><label>Wind Strength <span id="forestWindVal">1.0</span></label><input type="range" id="forestWind" min="0" max="3" step="0.1" value="1"/></div>
+      <div class="ctrl-group"><label>Season</label><select id="forestSeason"><option value="spring">Spring</option><option value="summer">Summer</option><option value="autumn">Autumn</option><option value="winter">Winter</option></select></div>
+      <button id="forestGrow" class="ctrl-btn active-btn">🌱 New Forest</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 08: VORONOI GALAXY ════════════════════════════ -->
+<section id="voronoiGalaxy" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 08</span>
+    <h2>Voronoi Galaxy Generator</h2>
+    <p>Animated Voronoi cells orbiting like a living cosmic diagram.</p>
+    <div class="section-formula">$$\mathcal{V}(p_i) = \{x \in \mathbb{R}^2 : |x-p_i| \le |x-p_j|\;orall j
+eq i\}$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap"><canvas id="voronoiCanvas"></canvas></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Cell Count <span id="vorNCVal">60</span></label><input type="range" id="vorNC" min="10" max="200" step="5" value="60"/></div>
+      <div class="ctrl-group"><label>Orbit Speed <span id="vorSpeedVal">0.5</span></label><input type="range" id="vorSpeed" min="0" max="2" step="0.05" value="0.5"/></div>
+      <div class="ctrl-group"><label>Edge Glow <span id="vorGlowVal">2</span></label><input type="range" id="vorGlow" min="0.5" max="5" step="0.5" value="2"/></div>
+      <div class="ctrl-group"><label>Color Theme</label><select id="vorColor"><option value="galaxy">Galaxy</option><option value="neon">Neon City</option><option value="ice">Frozen</option><option value="lava">Lava</option></select></div>
+      <p class="hint-text">🖱 Click to add seed points</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 09: STRANGE LOOP VISUALIZER ══════════════════ -->
+<section id="strangeLoop" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 09</span>
+    <h2>Strange Loop Visualizer</h2>
+    <p>Self-referential recursive geometry — Hofstadter's mathematical mirror.</p>
+    <div class="section-formula">$$f(f(\ldots f(x)\ldots)) = x, \quad \dim_H > \dim_T$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap"><canvas id="strangeCanvas"></canvas></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Recursion Depth <span id="slDepthVal">6</span></label><input type="range" id="slDepth" min="2" max="10" step="1" value="6"/></div>
+      <div class="ctrl-group"><label>Scale Factor <span id="slScaleVal">0.5</span></label><input type="range" id="slScale" min="0.2" max="0.8" step="0.02" value="0.5"/></div>
+      <div class="ctrl-group"><label>Rotation <span id="slRotVal">137.5</span>°</label><input type="range" id="slRot" min="0" max="360" step="0.5" value="137.5"/></div>
+      <div class="ctrl-group"><label>Zoom Speed <span id="slZoomVal">0.3</span></label><input type="range" id="slZoom" min="0" max="1" step="0.05" value="0.3"/></div>
+      <div class="ctrl-group"><label>Color Mode</label><select id="slColor"><option value="depth">By Depth</option><option value="angle">By Angle</option><option value="rainbow">Rainbow</option></select></div>
+      <p class="hint-text">🖱 Scroll to dive into recursion</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ART 10: MATHEMATICAL LIGHT INTERFERENCE ══════════ -->
+<section id="waveInterference" class="section art-section">
+  <div class="section-header">
+    <span class="section-num art-num">ART 10</span>
+    <h2>Mathematical Light Interference</h2>
+    <p>Wave superposition rendered as luminous interference patterns.</p>
+    <div class="section-formula">$$\Psi(x,y,t) = \sum_i A_i\sin\!\left(k_i r_i - \omega t + \phi_i
+ight)$$</div>
+  </div>
+  <div class="art-layout">
+    <div class="art-canvas-wrap"><canvas id="waveCanvas"></canvas></div>
+    <div class="panel art-panel">
+      <div class="ctrl-group"><label>Wave Sources <span id="waveNVal">4</span></label><input type="range" id="waveN" min="1" max="12" step="1" value="4"/></div>
+      <div class="ctrl-group"><label>Frequency <span id="waveFreqVal">3.0</span></label><input type="range" id="waveFreq" min="0.5" max="8" step="0.1" value="3"/></div>
+      <div class="ctrl-group"><label>Wavelength <span id="waveWLVal">80</span></label><input type="range" id="waveWL" min="20" max="200" step="5" value="80"/></div>
+      <div class="ctrl-group"><label>Color Mode</label><select id="waveColor"><option value="thermal">Thermal</option><option value="ocean">Ocean</option><option value="plasma">Plasma</option><option value="bw">Monochrome</option></select></div>
+      <button id="waveReset" class="ctrl-btn active-btn">⟳ Reset Sources</button>
+      <p class="hint-text">🖱 Click to add wave sources</p>
+    </div>
+  </div>
+</section>
+
 <!-- ══ FOOTER ═════════════════════════════════════════════ -->
 <footer>
   <div class="footer-formula">$$\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi} \qquad \sum_{n=1}^{\infty}\frac{1}{n^2} = \frac{\pi^2}{6}$$</div>
@@ -1164,6 +1397,43 @@
       notif.classList.remove('hidden');
       setTimeout(()=>notif.classList.add('hidden'),2500);
     }
+  });
+})();
+</script>
+
+<script src="js/art01_nebula.js"></script>
+<script src="js/art02_flowfield.js"></script>
+<script src="js/art03_topo.js"></script>
+<script src="js/art04_attractor.js"></script>
+<script src="js/art05_kaleidoscope.js"></script>
+<script src="js/art06_domaincolor.js"></script>
+<script src="js/art07_forest.js"></script>
+<script src="js/art08_voronoi.js"></script>
+<script src="js/art09_strangeloop.js"></script>
+<script src="js/art10_interference.js"></script>
+<script>
+// Art Mode toggle
+document.getElementById('artModeToggle')?.addEventListener('change',function(e){
+  document.body.classList.toggle('art-mode-on',e.target.checked);
+});
+
+// Update Discovery Mode to include art sections
+(function(){
+  const artSecs=['cosmicNebula','fourierFlow','topoSculpture','attractorCloud',
+    'kaleidoscope','domainArt','fractalForest','voronoiGalaxy','strangeLoop','waveInterference'];
+  const btn=document.getElementById('discoveryBtn');
+  if(!btn)return;
+  const origClick=btn.onclick;
+  const allSecs=['mandelbulb','quatjulia','minimal','hopf','geodesic','riemannsurf',
+    'calabiyau','schrodinger','sharmonics','montecarlo','lyapunov','kuramoto',
+    'boids','cellautomata','curvflow','fractals','animations','riemann','complex',
+    'reaction','fluid','hyperbolic','fourd','numtheory','famous',
+    ...artSecs];
+  btn.addEventListener('click',()=>{
+    const id=allSecs[Math.floor(Math.random()*allSecs.length)];
+    document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'center'});
+    const n=document.getElementById('wonderNotif');
+    if(n){n.textContent='🔭 Exploring: '+id;n.classList.remove('hidden');setTimeout(()=>n.classList.add('hidden'),2500);}
   });
 })();
 </script>
